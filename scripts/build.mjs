@@ -20,5 +20,8 @@ await build({
   alias: {
     '@': path.join(root, 'src'),
   },
+  banner: {
+    js: "import { createRequire as __createRequire } from 'node:module'; const require = __createRequire(import.meta.url);",
+  },
   logLevel: 'info',
 });
