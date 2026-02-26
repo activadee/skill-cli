@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Issue Creator"
+  short_description: "Draft and create comprehensive GitHub issues"
+  default_prompt: "Collect issue details from the user, draft a complete GitHub issue, and create it with gh."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Split PRD Into Tasks"
+  short_description: "Generate atomic task files from PRDs"
+  default_prompt: "Use $split-prd-into-tasks to break a PRD markdown file into task files with stories, acceptance criteria, test cases, and a linked tasklist."

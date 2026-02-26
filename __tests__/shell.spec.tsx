@@ -1,5 +1,5 @@
 import { render } from 'ink-testing-library';
-import { it, expect } from 'bun:test';
+import { expect, it } from 'vitest';
 import { Banner } from '../src/shell/components/banner';
 
 it('should generate a valid banner', () => {

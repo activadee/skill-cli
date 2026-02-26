@@ -1,70 +1,52 @@
-# create-cli-app
+# skill-cli
 
-A CLI app template built with **Bun**, **TypeScript**, **Commander**, and **React Ink**.
+A TypeScript CLI for syncing agent skills from a Git repository into machine-local or project-local destinations.
 
 ## Features
 
-- **Bun**: Ultra-fast JavaScript runtime for building and bundling.
-- **TypeScript**: Strongly typed programming language for better developer experience.
-- **Commander**: Minimal and flexible Node.js command-line interface library.
-- **React Ink**: Build beautiful CLI interfaces using React components.
+- Interactive Ink TUI flow for selecting and syncing skills.
+- Pull-only sync from a remote repository path (default: `skills`).
+- Destination targets:
+  - `root`: `$XDG_HOME/skills` (fallback `~/skills`)
+  - `local`: `<cwd>/skills`
+- Per-skill overwrite confirmation (or `--yes` for non-interactive confirmations).
+- Optional inclusion of `.system/*` skills via `--include-system`.
 
-## Getting Started
+## Install
 
-### Prerequisites
+```bash
+pnpm install
+```
 
-Ensure you have the following installed:
+## Build
 
-- [Bun](https://bun.sh/) (latest version)
-- Node.js (optional, if Bun is not globally installed)
+```bash
+pnpm run build
+```
 
-### Installation
+## Run
 
-1. Clone the repository:
+```bash
+pnpm run dev:sync
+```
 
-   ```bash
-   git clone git@github.com/jrmmendes/create-cli-app.git
-   cd create-cli-app
-   ```
+### Command
 
-2. Install dependencies:
+```bash
+skills sync [options]
+```
 
-   ```bash
-   bun install
-   ```
+Options:
 
-### Usage
+- `--repo <url>`: override source repo URL (defaults to local `origin` remote)
+- `--branch <name>`: source branch (default: `main`)
+- `--repo-path <path>`: source skills directory (default: `skills`)
+- `--target <root|local>`: preselect destination target
+- `--include-system`: include `.system/*` skills in selection
+- `--yes`: skip overwrite confirmations
 
-1. Build the project:
+## Test
 
-   ```shell
-   bun run build
-   ```
-
-2. Run the CLI:
-
-   ```shell
-   bun run start
-   ```
-
-3. Run the tests:
-
-   ```shell
-   bun run test
-   ```
-
-> [!NOTE]
-> If you want to have coverage reports in HTML format, install lcov globally:
-> ```shell
-> # use apt, homebrew, or your default OS package manager
-> dnf in lcov
-> ```
-
-### Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request.
-
-### License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
+```bash
+pnpm run test
+```

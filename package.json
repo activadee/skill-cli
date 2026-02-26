@@ -1,41 +1,47 @@
 {
   "version": "0.1.0",
+  "packageManager": "pnpm@10.30.2",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jrmmendes/create-cli-app.git"
+    "url": "git+https://github.com/activadee/skill-cli.git"
   },
   "keywords": [
     "cli"
   ],
-  "name": "@jrmmendes/create-cli-app",
+  "name": "@activadee/skill-cli",
   "type": "module",
   "author": "jrmmendes <jrmmendes@outlook.com>",
   "license": "MIT",
-  "description": "Create a prodution ready CLI with Bun, Typescript, Commander and Ink",
+  "description": "Agent skills CLI with TypeScript, Commander, and Ink",
   "bin": {
+    "skills": "./bin.js",
     "create-cli-app": "./bin.js"
   },
   "scripts": {
-    "clear": "rimraf dist coverage/html coverage/lcov",
-    "test": "FORCE_COLOR=0 NODE_ENV=test bun test",
-    "test:html": "bun run test && bun run g:lcov-html",
-    "test:html:open": "bun run test:html && xdg-open ./coverage/html/index.html",
-    "build": "bun run clear && bun build src/entrypoint.ts --outfile=./dist/bundle.js --target=node --format=esm --minify",
+    "clear": "rimraf dist coverage",
+    "test": "FORCE_COLOR=0 NODE_ENV=test vitest run --coverage",
+    "test:html": "FORCE_COLOR=0 NODE_ENV=test vitest run --coverage --coverage.reporter=html --coverage.reporter=lcov --coverage.reporter=text",
+    "test:html:open": "FORCE_COLOR=0 NODE_ENV=test vitest run --coverage --coverage.reporter=html --coverage.reporter=lcov --coverage.reporter=text && xdg-open ./coverage/index.html",
+    "build": "node ./scripts/build.mjs",
+    "dev": "tsx ./src/entrypoint.ts",
+    "dev:sync": "tsx ./src/entrypoint.ts sync",
     "start": "node ./bin.js",
-    "start:dev": "bun ./src/entrypoint.ts",
-    "prepublishOnly": "bun run build",
-    "g:lcov-html": "genhtml coverage/lcov.info -o ./coverage/html -c ./coverage/style.css"
+    "start:dev": "tsx ./src/entrypoint.ts",
+    "prepublishOnly": "node ./scripts/build.mjs"
   },
   "devDependencies": {
-    "@types/bun": "^1.3.9",
     "@types/ink": "^2.0.3",
     "@types/ink-testing-library": "^1.0.4",
     "@types/node": "^25.3.1",
     "@types/react": "^19.2.14",
+    "@vitest/coverage-v8": "^3.2.4",
+    "esbuild": "^0.25.12",
     "ink-testing-library": "^4.0.0",
     "react-devtools-core": "^7.0.1",
     "rimraf": "^6.1.3",
-    "typescript": "^5.9.3"
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "commander": "^14.0.3",
@@ -49,5 +55,10 @@
   ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }

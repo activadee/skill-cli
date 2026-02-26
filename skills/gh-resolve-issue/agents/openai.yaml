@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Issue Resolver"
+  short_description: "Fetch and resolve specific GitHub issues"
+  default_prompt: "Fetch the requested GitHub issue, implement a fix, and prepare a PR."
